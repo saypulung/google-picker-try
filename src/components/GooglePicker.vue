@@ -19,9 +19,9 @@ export default {
         accessToken: null,
         pickerInited: false,
         gisInited: false,
-        CLIENT_ID: 'CLIENT ID NYA COK',
-        API_KEY: 'API KEY NYA COK',
-        APP_ID: 'APP ID NYA COK',
+        CLIENT_ID: '{CLIENT_ID}',
+        API_KEY: '{API_KEY}',
+        APP_ID: '{APP ID}',
     }),
     computed: {
         SCOPES() {
