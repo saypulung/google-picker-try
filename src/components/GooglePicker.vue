@@ -11,6 +11,9 @@
     </div>
 </template>
 <script>
+
+import { config } from '@/config'
+
 export default {
     name: 'GooglePicker',
     data: () => ({
@@ -19,9 +22,9 @@ export default {
         accessToken: null,
         pickerInited: false,
         gisInited: false,
-        CLIENT_ID: '{CLIENT_ID}',
-        API_KEY: '{API_KEY}',
-        APP_ID: '{APP ID}',
+        CLIENT_ID: config.google_client_id,
+        API_KEY: config.google_api_key,
+        APP_ID: config.google_app_id,
     }),
     computed: {
         SCOPES() {

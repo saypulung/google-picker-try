@@ -5,20 +5,24 @@
     <form enctype="multipart/form-data" action="http://localhost/dropbox/get.php" method="post">
       <h3>Form Upload example</h3><br>
       <input type="file" name="dropbox_file"><br>
-      <button type="submit">Submit</button>
+      <button
+        type="submit">Submit</button>
     </form>
   </div>
 </template>
 <script>
+
+import { config } from '@/config'
+
 export default {
   name:'DropboxChooser',
   data: () => ({
-
+    isDisabled: false,
   }),
   beforeMount() {
     const scriptEl2 = document.createElement('script');
     scriptEl2.setAttribute('id', `dropboxjs`);
-    scriptEl2.setAttribute('data-app-key', `v4tjlv6a7a0574h`);
+    scriptEl2.setAttribute('data-app-key', config.dropbox_id);
     scriptEl2.setAttribute('src','https://www.dropbox.com/static/api/2/dropins.js');
     scriptEl2.setAttribute('async', true);
     scriptEl2.setAttribute('defer', true);
@@ -32,7 +36,7 @@ export default {
 		    success: function(files) {
 		        console.log(files);
 		        successGet(files[0], () => {
-
+              this.isDisabled = false;
             });
 		    },
 		    cancel: function() {
@@ -61,6 +65,7 @@ export default {
   },
   methods: {
     downloadFile(file, callback) {
+      this.isDisabled = true;
       console.log('downloading file.......');
       const fileInput = document.querySelector('input[type="file"]');
       if (!file.isDir) {
@@ -69,6 +74,7 @@ export default {
         xhr.open('GET', file.link);
         xhr.responseType = "blob";
         xhr.onload = function() {
+          this.isDisabled = false;
           const blob = xhr.response;
           const myFile = new File([blob], file.name);
 
